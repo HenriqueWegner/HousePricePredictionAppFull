@@ -1,0 +1,187 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>House Price Prediction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    
+    <section class="header">
+        <button class="nav-toggle" aria-label="toggle navigation">
+            <span class="hamburger"></span>
+        </button>
+        <nav class="nav">
+            <a href="/"><img src="{{ url_for('static', filename='images/logo.png.png')}}" /></a>
+            <div class="nav__list" id="navLinks">
+                <!-- <i class="fa fa-times" onclick="hideMenu()"></i> -->
+                <ul>
+                    <li class="nav__item"><a href="/" class="nav__link">HOME</a></li>
+                    <li class="nav__item"><a href="#form-pricechecker" class="nav__link">CHECK PRICE</a></li>
+                    <li class="nav__item"><a href="#footer" class="nav__link">ABOUT</a></li>
+                </ul>
+            </div>
+            <!-- <i class="fa fa-bars" onclick="showMenu()"></i> -->
+        </nav>
+
+        <div class="text-box">
+            <h1> The real estate market in Dublin has changed.</h1>
+            <p>The Irish estate market has been growing, especially in Dublin in the last three years
+                where there is a growing demand for commercial properties and houses.<br>Dublin is an extremely
+                attractive area in the country.
+            </p>
+            {% for message in get_flashed_messages() %}
+            <h2>{{ message }}</h2>
+            {% endfor %}
+            <a href="#form-pricechecker" class="hero-btn">CHECK PRICE</a>
+        </div>
+
+    </section>
+
+    <!--------- Form --------->
+    
+    <section id="form-pricechecker" class="pricechecker">
+
+        <h1>Enter an address to check the estimated price </h1>
+    
+        <!-- Main Input For Receiving Query to our ML -->
+        <form action="predict" method="post">
+            <input type="text" name="address" placeholder="Address" required="required" />
+            <br>
+            <p>Is the house new or second hand?</p>
+            <label>New House
+                <input type="radio" id="new-house" name="house-type" value="new-house" required>
+                <span></span>
+            </label>
+            <label>Second Hand House
+                <input type="radio" id="old-house" name="house-type" value="old-house" required>
+                <span></span>
+            </label>
+            <button class="form-button" type="submit" class="btn btn-primary btn-block btn-large">Predict Price</button>
+        </form>
+    
+    </section>
+
+    <!---------Areas--------->
+
+    <section class="areas">
+        <h1>Dublin Areas</h1>
+        <p> Are you considering moving to Dublin? Check some of the areas.</p>
+
+        <div class="row">
+            <div class="areas-col">
+                <h3>North Inner City</h3>
+                <p> You won’t find many residential areas or good schools here, but
+                    if you want to live in Dublin short-term or see the city through
+                    the eyes of a tourist, living in the North Inner City is
+                    an excellent option, you get great nightlife, excellent eateries and endless action. But you also
+                    get
+                    soaring prices, neverending noise and very few green spaces
+                </p>
+            </div>
+            <div class="areas-col">
+                <h3>Dundrum</h3>
+                <p> Dundrum is a real draw for families. It’s residential, it’s quiet and
+                    it’s dripping with charm. But more than that, it has a cute town center, great green
+                    spaces and even an urban zoo. There are also an excellent selection of schools in the area.
+                    And although it’s on the city’s outskirts, it’s only a 20-minute tram trip
+                    into the center, making the neighborhood far from remote.
+                </p>
+            </div>
+            <div class="areas-col">
+                <h3>Dalkey</h3>
+                <p> Peaceful, quiet and serene, it’s a great pick for those seeking a tranquil life. Because of this,
+                    it’s
+                    one of the best boroughs in Dublin for families.
+                    If you like the idea of living in an area packed with outdoor attractions and adventures, other
+                    good Dublin neighborhoods include Sandyford, Portmarnock and Stoneybatter.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- JAVASCRIPT TO SHOW AND HIDE THE MENU WHEN IN SMALL SCREENS-->
+    <script>
+
+        const navToggle = document.querySelector('.nav-toggle');
+        // need to select each individual link
+        const navLinks = document.querySelectorAll('.nav__link'); //navLinks will contain a node list
+
+        navToggle.addEventListener('click', () => {
+            document.body.classList.toggle('nav-open');
+        });
+
+        //create a loop to add an event listener to each node in the list (each link in the nav) 
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                document.body.classList.remove('nav-open');
+            })
+        })
+
+        // var navLinks = document.getElementById("navLinks");
+
+        // function showMenu() {
+        //     navLinks.style.righ = "0";
+        // }
+        // function hideMenu() {
+        //     navLinks.style.righ = "-200px";
+        // }
+    </script>
+    <!----Footer-->
+    <section id="footer" class="footer">
+        <h2>About Us</h2>
+        <p> We are a group of students from CCT College Dublin, and in this
+            website you can see our predicting model, which <br>uses IT technology, such as
+            data mining, data analysis, and machine learning algorithm <br>that allow us to predict
+            property prices in Dublin.
+            <br>We have developped a property prediction model in Dublin as a tool to give international
+            investors insights into the Irish market.<br> The idea of using IT and business strategy
+            combined will benefit investors about decision making regarding the real estate market.
+        </p>
+        <div class="images">
+            <div class="img-henrique">
+                <img src="{{ url_for('static', filename='images/henrique.jpeg')}}" alt={d.name} />
+                <h4>
+                    <a class="underline" href="https://www.linkedin.com/in/hwegner/" target="_blank">Henrique</a>
+                </h4>
+            </div>
+            <div class="img-larissa">
+                <img src="{{ url_for('static', filename='images/larissa.jpg')}}" alt={d.name} />
+                <h4>
+                    <a class="underline" href="https://www.linkedin.com/in/larissaevaldt/" target="_blank">Larissa</a>
+                </h4>
+            </div>
+            <div class="img-leandro">
+                <img src="{{ url_for('static', filename='images/leandro.jpeg')}}" alt={d.name} />
+                <h4>
+                    <a class="underline" href="https://www.linkedin.com/in/leandro-silveira-54b27bb2/" target="_blank">Leandro</a>
+                </h4>
+            </div>
+            <div class="img-maiara">
+                <img src="{{ url_for('static', filename='images/maiara.jpeg')}}" alt={d.name} />
+                <h4>
+                    <a class="underline" href="https://www.linkedin.com/in/maiara-figueredo-a2928436/" target="_blank">Maiara</a>
+                </h4>
+            </div>
+            <div class="img-patricia">
+                <img src="{{ url_for('static', filename='images/patricia.jpeg')}}" alt={d.name} />
+                <h4>
+                    <a class="underline" href="https://www.linkedin.com/in/patriciacorreia2018/" target="_blank">Patricia</a>
+                </h4>
+            </div>
+        </div>
+        <div class="icons">
+            <a href="https://github.com/HenriqueWegner/housepricepredictionapp" target="_blank">
+            <i class="fa fa-github fa-2x"></i>
+            </a>
+        </div>
+    </section>
+
+</body>
+
+</html>

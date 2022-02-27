@@ -1,0 +1,502 @@
+html {
+  scroll-behavior: smooth;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+*:focus {
+  outline: none !important;
+}
+.header {
+  min-height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7)),
+    url(images/home.jpg);
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+nav {
+  display: flex;
+  padding: 2% 6%;
+  justify-content: space-between;
+  align-items: center;
+}
+nav img {
+  width: 100px;
+}
+.nav__list {
+  flex: 1;
+  text-align: right;
+}
+.nav__list ul li {
+  list-style: none;
+  display: inline-block;
+  padding: 8px 12px;
+  position: relative;
+}
+.nav__list ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 13px;
+}
+.nav__list ul li::after {
+  content: "";
+  width: 0%;
+  height: 2px;
+  background: #f44336;
+  display: block;
+  margin: auto;
+  transition: 0.5s;
+}
+.nav__list ul li:hover::after {
+  width: 100%;
+}
+.text-box {
+  width: 90%;
+  color: #fff;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.text-box h1 {
+  font-size: 62px;
+}
+.text-box p {
+  margin: 10px 0 40px;
+  font-size: 14px;
+  color: #fff;
+}
+.hero-btn {
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 12px 34px;
+  font-size: 13px;
+  background: transparent;
+  position: relative;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.hero-btn:hover {
+  border: 1px solid #f44336;
+  background: #f44336;
+  transition: 1s;
+}
+
+.nav-toggle {
+  display: none;
+}
+
+/* this code is for small devices*/
+@media (max-width: 800px) {
+  .nav-toggle {
+    display: block;
+  }
+  .nav {
+    position: fixed;
+    background: #303030;
+    color: #fff;
+    /* don't really understand this part, research more on position properties */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    /* This kind of shoves it to the side, 100% makes the nav links completely disappear, and 0% will make it go on top of the whole content of the page */
+    transform: translateX(100%);
+    /*have no idea what this does yet  */
+    transition: transform 250ms cubic-bezier(0.5, 0, 0.5, 1);
+    display: flex;
+    flex: column;
+  }
+
+  .nav-open .nav__list {
+    height: 100%;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-open .nav__list ul {
+    height: 100%;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav__link {
+    color: inherit;
+    font-weight: 900;
+    font-size: 3.75rem;
+    text-decoration: none;
+  }
+
+  /* nav-toggle is a class added to the button element which has the span with the 3 lines forming the hamburger */
+  .nav-toggle {
+    margin-top: 20px;
+    padding: 0.5em;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    /* again, don't really understand this yet */
+    /* we had our navigation coming in front of everything, so when we have our nav open */
+    /* we want to make sure that the button stays on top of that, so we can still see the hamburger menu */
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    z-index: 1000;
+  }
+
+  .nav-open .nav {
+    transform: translateX(0);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .nav-open .nav a {
+    margin-top: 20px;
+  }
+
+  .nav-open .nav-toggle {
+    /* The reason we are switching is because We don't want it to always have a position of fixed */
+    /* because we don't want it to scroll with the site when we are looking at the site */
+    /* but we do want it to scroll when we press the hamburger and we are looking at the nav links */
+    position: fixed;
+  }
+
+  /* Transforms the three bars of the hamburger into an X */
+  .nav-open .hamburger {
+    transform: rotate(0.625turn);
+  }
+  .nav-open .hamburger::before {
+    transform: rotate(90deg) translateX(-6px);
+  }
+  .nav-open .hamburger::after {
+    opacity: 0;
+  }
+
+  .hamburger {
+    /* because it is a span, and span is inline by default, this just makes sure we don't run in any issues with it*/
+    display: block;
+    /* because we are going to be using pseudo elements with absolute positioning and this will make our life much easier */
+    position: relative;
+  }
+
+  .hamburger,
+  .hamburger::before,
+  .hamburger::after {
+    background: #fff;
+    width: 2em;
+    height: 3px;
+    border-radius: 1em;
+    transition: transform 250ms ease-in-out;
+  }
+
+  .hamburger::before,
+  .hamburger::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+
+  .hamburger::before {
+    top: 6px;
+  }
+  .hamburger::after {
+    bottom: 6px;
+  }
+  .text-box h1 {
+    font-size: 40px;
+  }
+}
+
+/*-------form------*/
+.pricechecker {
+  width: 80%;
+  margin: auto;
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pricechecker h1 {
+  text-align: center;
+}
+form {
+  width: 80%;
+  height: 300px;
+  margin: 40px;
+  padding: 20px 50px;
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 10px;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.08);
+}
+input[type="text"] {
+  padding: 10px;
+  border: 0;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.08);
+}
+input[type="text"]:focus {
+  border-color: #f44336;
+}
+
+.form-button {
+  display: inline-block;
+  text-decoration: none;
+  border: 1px solid black;
+  margin-top: 20px;
+  padding: 12px 34px;
+  font-size: 13px;
+  text-transform: uppercase;
+  background: transparent;
+  position: relative;
+  cursor: pointer;
+}
+
+.form-button:hover {
+  color: #fff;
+  border: 1px solid #f44336;
+  background: #f44336;
+  transition: 1s;
+}
+
+/* container */
+label {
+  display: block;
+  margin-bottom: 4px;
+  position: relative; /* to contain absolute elements */
+  padding-left: 30px; /* free space for custom radio button */
+  cursor: pointer;
+}
+/* hide default radio button  */
+label input[type="radio"] {
+  position: absolute; /* prevent taking any space */
+  /* cross-browser hidingg */
+  opactiy: 0;
+  width: 0;
+  height: 0;
+}
+/* custom radio button */
+label span {
+  position: absolute;
+  /* position to the free space in <label> */
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background-color: #ddd;
+  border-radius: 50%;
+  transition: 0.3s background-color; /* slight transition */
+}
+/* the check icon */
+label span:after {
+  content: "";
+  position: absolute;
+  display: none;
+
+  /* middle */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+label:hover span {
+  background-color: #ccc;
+}
+
+/**** Here's the trick ***/
+label input:checked ~ span {
+  background-color: #f44336;
+}
+label input:checked ~ span:after {
+  display: block;
+}
+
+/*-------areas------*/
+.areas {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  padding-top: 100px;
+}
+h1 {
+  font-size: 36px;
+  font-weight: 600;
+}
+p {
+  color: #777;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 22px;
+  padding: 10px;
+}
+.row {
+  margin-top: 5%;
+  display: flex;
+  justify-content: space-between;
+}
+.areas-col {
+  flex-basis: 31%;
+  background: #e9e6e6;
+  border-radius: 10px;
+  margin-bottom: 5%;
+  padding: 20px 12px;
+  box-sizing: border-box;
+  transition: 0.5s;
+}
+h3 {
+  text-align: center;
+  font-weight: 600;
+  margin: 10px 0;
+}
+.areas-col:hover {
+  box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.2);
+}
+@media (max-width: 800px) {
+  .row {
+    flex-direction: column;
+  }
+}
+/*--------------------Footer----------------*/
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  padding: 100px 0;
+}
+.footer h4 {
+  margin-bottom: 25px;
+  margin-top: 20px;
+  font-weight: 600;
+}
+.icons .fa {
+  color: #f44336;
+  margin: 0 13px;
+  cursor: pointer;
+  padding: 18px 0;
+}
+
+/* test */
+.images {
+  width: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.images img {
+  margin-top: 20px;
+  width: 110px;
+  height: 110px;
+  filter: grayscale();
+  /* border-radius: 50%; */
+  border-radius: 10px;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.1);
+  transition: 0.4s filter ease;
+}
+
+.img-patricia:hover img {
+  filter: none;
+}
+.img-leandro:hover img {
+  filter: none;
+}
+.img-larissa:hover img {
+  filter: none;
+}
+.img-henrique:hover img {
+  filter: none;
+}
+.img-maiara:hover img {
+  filter: none;
+}
+
+.images h4 a {
+  text-decoration: none;
+  /* line-height: 36px; */
+  text-transform: uppercase;
+  color: black;
+  /* letter-spacing: 0.1em; */
+  text-align: center;
+  font-size: 0.8rem;
+}
+.images h4::after {
+  content: "";
+  width: 0%;
+  height: 2px;
+  background: #f44336;
+  display: block;
+  margin: auto;
+  transition: 0.5s;
+}
+.images h4:hover::after {
+  width: 40%;
+}
+
+/*------------------- ERROR -------------------------*/
+.error-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notfound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.notfound img {
+  height: 400px;
+  width: 400px;
+}
+
+.notfound a {
+  display: inline-block;
+  text-decoration: none;
+  color: #f44336;
+  border: 1px solid #f44336;
+  padding: 12px 34px;
+  font-size: 13px;
+  background: transparent;
+  position: relative;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.notfound a:hover {
+  border: 1px solid #f44336;
+  color: #fff;
+  background: #f44336;
+  transition: 1s;
+}
